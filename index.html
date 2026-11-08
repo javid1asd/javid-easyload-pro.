@@ -1,1 +1,102 @@
-<!doctype html><html lang="ps" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#123047"><title>Javid AHMADI</title><link rel="stylesheet" href="style.css"></head><body><header><h1>Javid AHMADI</h1><p>د مشتریانو حساب کتاب</p></header><main><section class="stats"><div>ټول پاتې پور<strong id="due">۰</strong></div><div>مشتریان<strong id="count">۰</strong></div><div>نن ورکړل شوی لوډ<strong id="todayLoad">۰</strong></div><div>نن ترلاسه شوې پیسې<strong id="todayPaid">۰</strong></div></section><section><h2>نوی مشتری</h2><input id="name" placeholder="د مشتری نوم"><input id="phone" placeholder="موبایل نمبر"><button id="add">مشتری اضافه کړه</button></section><section><h2>نوې معامله</h2><select id="customer"><option value="">مشتری انتخاب کړه</option></select><input id="amount" type="number" min="1" placeholder="مبلغ"><select id="type"><option value="load">لوډ / ما پیسې ورکړې (پور زیاتوي)</option><option value="paid">مشتري پیسې راکړې (پور کموي)</option></select><input id="note" placeholder="یادښت (اختیاري)"><button id="save">معامله ثبت کړه</button></section><section><h2>د معاملو تاریخچه</h2><input id="filter" type="date"><div id="history"></div></section><section><h2>د مشتریانو حسابونه</h2><div id="list"></div></section><button class="secondary" id="export">CSV بیک اپ ښکته کړه</button></main><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="ps" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#102b3d">
+  <title>Javid EasyLoad Pro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="lockScreen" class="lock-screen hidden">
+    <div class="lock-card">
+      <div class="brand-mark">JE</div>
+      <h1>Javid EasyLoad Pro</h1>
+      <p id="lockMessage">خپل پټ کوډ ولیکه</p>
+      <input id="pinInput" type="password" inputmode="numeric" maxlength="8" placeholder="۴ تر ۸ شمېرو پټ کوډ">
+      <button id="pinSubmit">داخل شه</button>
+      <small id="pinError" class="error"></small>
+    </div>
+  </div>
+
+  <header>
+    <div class="brand-mark small-mark">JE</div>
+    <h1>Javid EasyLoad Pro</h1>
+    <p>د مشتریانو حساب کتاب</p>
+    <button id="lockNow" class="header-lock" type="button">قلف 🔒</button>
+  </header>
+
+  <main>
+    <section class="stats">
+      <div><span>ټول پاتې پور</span><strong id="due">۰ ؋</strong></div>
+      <div><span>مشتریان</span><strong id="count">۰</strong></div>
+      <div><span>نن ورکړل شوی لوډ</span><strong id="todayLoad">۰ ؋</strong></div>
+      <div><span>نن ترلاسه شوې پیسې</span><strong id="todayPaid">۰ ؋</strong></div>
+    </section>
+
+    <section>
+      <h2>نوی مشتری</h2>
+      <div class="form-grid">
+        <input id="name" placeholder="د مشتری نوم">
+        <input id="phone" inputmode="tel" placeholder="موبایل نمبر">
+      </div>
+      <button id="add">مشتری اضافه کړه</button>
+      <div class="search-wrap">
+        <input id="search" placeholder="🔍 د نوم یا موبایل نمبر له مخې لټون">
+      </div>
+      <div id="list" class="customer-list"></div>
+    </section>
+
+    <section>
+      <h2>نوې معامله</h2>
+      <select id="customer"><option value="">مشتری انتخاب کړه</option></select>
+      <div class="form-grid">
+        <input id="amount" type="number" min="1" step="any" placeholder="مبلغ">
+        <select id="type">
+          <option value="load">لوډ / ما پیسې ورکړې (پور زیاتوي)</option>
+          <option value="paid">مشتري پیسې راکړې (پور کموي)</option>
+        </select>
+      </div>
+      <input id="note" placeholder="یادښت (اختیاري)">
+      <button id="save">معامله ثبت کړه</button>
+    </section>
+
+    <section>
+      <h2>د معاملو تاریخچه</h2>
+      <div class="form-grid">
+        <input id="filter" type="date" aria-label="د ورځې فلټر">
+        <button id="clearFilter" class="secondary">فلټر پاک کړه</button>
+      </div>
+      <div id="history"></div>
+    </section>
+
+    <section>
+      <h2>راپورونه</h2>
+      <div class="form-grid">
+        <select id="reportPeriod">
+          <option value="day">نننی راپور</option>
+          <option value="month">د روانې میاشتې راپور</option>
+          <option value="year">د روان کال راپور</option>
+          <option value="all">ټول راپور</option>
+        </select>
+        <button id="makeReport">راپور ښکاره کړه</button>
+      </div>
+      <div id="report" class="report-grid"></div>
+    </section>
+
+    <section>
+      <h2>بیک اپ او معلومات</h2>
+      <p class="muted">د ټولو مشتریانو او معاملو خوندي کاپي جوړول یا بېرته راوستل.</p>
+      <div class="form-grid">
+        <button id="backup">JSON بیک اپ ښکته کړه</button>
+        <button id="restoreBtn" class="secondary">بیک اپ بېرته راوړه</button>
+        <input id="restoreFile" type="file" accept=".json,application/json" hidden>
+      </div>
+      <button id="export" class="secondary">CSV راپور ښکته کړه</button>
+    </section>
+
+    <footer>Javid EasyLoad Pro · ستا د حسابونو ملګری</footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
