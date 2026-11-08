@@ -1,0 +1,3 @@
+دا د APK جوړولو پروژه ده، چمتو APK نه دی.
+ټول فایلونه GitHub repository ته پورته/Update کړه. بیا Actions ته لاړ شه. Android APK Build workflow پرانیزه او Run workflow ووهه. د شین Success وروسته د Artifacts برخه کې Javid-EasyLoad-APK ښکته کړه؛ ZIP کې app-debug.apk وي.
+اپ یوازې حساب کتاب کوي، مستقیم Easyload نه لېږي. معلومات په همدې موبایل کې ساتل کېږي؛ CSV بیک اپ منظم واخله.
