@@ -2,7 +2,10 @@
   "name": "javid-easyload-pro",
   "version": "1.0.0",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "build": "node -e \"const fs=require('fs');fs.rmSync('www',{recursive:true,force:true});fs.mkdirSync('www',{recursive:true});for(const f of ['index.html','app.js','style.css'])fs.copyFileSync(f,'www/'+f)\"",
+    "android:sync": "npm run build && npx cap sync android"
+  },
   "dependencies": {
     "@capacitor/android": "^7.4.0",
     "@capacitor/core": "^7.4.0"
